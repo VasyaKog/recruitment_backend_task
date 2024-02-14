@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\User;
 
 use App\Entity\User;
@@ -14,9 +16,11 @@ class UserRegistration
         $this->em = $em;
     }
 
-    public function registerValidUser(User $user): void
+    public function registerValidUser(User $user): User
     {
         $this->em->persist($user);
         $this->em->flush();
+
+        return $user;
     }
 }

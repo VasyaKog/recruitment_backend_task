@@ -1,21 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Repository\PostRepository;
-use Domain\Post\PostManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PostController extends AbstractController
+final class PostController extends AbstractController
 {
+    private PostRepository $postRepository;
+
+    public function __construct(
+        PostRepository $postRepository
+    ) {
+        $this->postRepository = $postRepository;
+    }
+
     /**
      * @Route("/", name="app_post_index")
      */
-    public function index(PostRepository $postRepository): Response
+    public function index(): Response
     {
-        $posts = $postRepository->findBy([], ['id' => 'desc'], 100);
+        $posts = $this
+            ->postRepository
+            ->findBy(
+                [],
+                ['id' => 'desc'],
+                100,
+            );
 
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
@@ -25,10 +41,10 @@ class PostController extends AbstractController
     /**
      * @Route("/post/{id}", name="app_post_show")
      */
-    public function show(PostManager $postManager, $id): Response
+    public function show($id): Response
     {
         return $this->render('post/show.html.twig', [
-            'post' => $postManager->findPost($id),
+            'post' => $this->postRepository->find($id),
         ]);
     }
 }

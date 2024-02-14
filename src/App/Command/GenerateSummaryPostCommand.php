@@ -9,10 +9,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateRandomPostCommand extends Command
+class GenerateSummaryPostCommand extends Command
 {
-    protected static $defaultName = 'app:post:generate';
-    protected static $defaultDescription = 'Add random post';
+    protected static $defaultName = 'app:post:summary';
+    protected static $defaultDescription = 'Add summary post';
 
     private PostGenerator $postGenerator;
 
@@ -29,9 +29,9 @@ class GenerateRandomPostCommand extends Command
         InputInterface $input,
         OutputInterface $output
     ): int {
-        $this->postGenerator->generateRandom();
+        $this->postGenerator->generateSummary();
 
-        $output->writeln('A random post has been generated.');
+        $output->writeln('A summary post has been generated.');
 
         return Command::SUCCESS;
     }

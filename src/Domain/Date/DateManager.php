@@ -17,15 +17,34 @@ final class DateManager
     ): ResultDto {
         $result = new ResultDto();
 
-        $dateTime = self::getDateTimeForSpecificDate($inputDto->getDate(), $inputDto->getTimezone());
+        $dateTime = self::getDateTimeForSpecificDate(
+            $inputDto->getDate(),
+            $inputDto->getTimezone(),
+        );
 
-        $result->setTimezoneMinutesOffsetWithUtc($this->getOffsetWithUtcInMinutes($dateTime));
+        $result
+            ->setTimezoneMinutesOffsetWithUtc(
+                $this->getOffsetWithUtcInMinutes($dateTime),
+            )
+        ;
 
-        $result->setDayCountInFebruaryInSelectedYear($this->getCurrentYearFebruaryDayCount($dateTime));
+        $result
+            ->setDayCountInFebruaryInSelectedYear(
+                $this->getCurrentYearFebruaryDayCount($dateTime),
+            )
+        ;
 
-        $result->setSelectedMonthDateDayCount($this->getSelectedMonthDayCount($dateTime));
+        $result
+            ->setSelectedMonthDateDayCount(
+                $this->getSelectedMonthDayCount($dateTime),
+            )
+        ;
 
-        $result->setSelectedMonthName($this->getSelectedMonthName($dateTime));
+        $result
+            ->setSelectedMonthName(
+                $this->getSelectedMonthName($dateTime),
+            )
+        ;
 
         return $result;
     }

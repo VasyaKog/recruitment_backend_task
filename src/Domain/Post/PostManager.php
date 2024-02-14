@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Post;
 
 use App\Entity\Post;
@@ -9,24 +11,24 @@ class PostManager
 {
     private EntityManagerInterface $em;
 
-    public function __construct(EntityManagerInterface $em)
-    {
+    public function __construct(
+        EntityManagerInterface $em
+    ) {
         $this->em = $em;
     }
 
-    public function addPost($title, $content)
-    {
+    public function addPost(
+        string $title,
+        string $content
+    ): Post {
         $post = new Post();
+
         $post->setTitle($title);
         $post->setContent($content);
+
         $this->em->persist($post);
         $this->em->flush();
-    }
 
-    public function findPost($id): Post
-    {
-        $postRepository = $this->em->getRepository(Post::class);
-
-        return $postRepository->findOneBy(['id' => $id]);
+        return $post;
     }
 }
