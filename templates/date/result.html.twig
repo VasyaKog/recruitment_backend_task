@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Date processing result{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    Form input: <br/>
+    date={{ input.date }} <br/>
+    timezone={{ input.timezone }}<br/>
+    <br/>
+    <br/>
+
+    Output:
+
+    The timezone: {{input.timezone}} has {{ result.timezoneMinutesOffsetWithUtc }} minutes offset to UTC on given day at midnight.<br />
+    February in this year has {{ result.dayCountInFebruaryInSelectedYear }} days.<br />
+    Specified month ({{ result.selectedMonthName }}) has {{ result.selectedMonthDateDayCount }} days.
+</div>
+{% endblock %}

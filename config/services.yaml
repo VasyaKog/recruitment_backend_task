@@ -22,6 +22,8 @@ services:
 
     Domain\:
         resource: '../src/Domain/'
+        exclude:
+            - '../src/Domain/*/Dto/*'
 
     joshtronic\LoremIpsum: ~
 
